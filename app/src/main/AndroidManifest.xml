@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloWorld" >
         <activity
-            android:name=".DrawerActivity"
-            android:exported="true"
-            android:label="@string/title_activity_drawer"
-            android:theme="@style/Theme.HelloWorld.NoActionBar" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
