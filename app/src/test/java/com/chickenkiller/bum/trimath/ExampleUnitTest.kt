@@ -1,4 +1,4 @@
-package com.chickenkiller.bum.helloworld
+package com.chickenkiller.bum.trimath
 
 import org.junit.Test
 

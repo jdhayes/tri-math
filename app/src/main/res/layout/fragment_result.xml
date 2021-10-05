@@ -7,7 +7,7 @@
     <data>
         <variable
             name="result"
-            type="com.chickenkiller.bum.helloworld.ResultFragment" />
+            type="com.chickenkiller.bum.trimath.ResultFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

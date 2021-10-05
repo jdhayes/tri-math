@@ -1,4 +1,4 @@
-package com.chickenkiller.bum.helloworld
+package com.chickenkiller.bum.trimath
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.chickenkiller.bum.helloworld.databinding.FragmentResultBinding
+import com.chickenkiller.bum.trimath.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
     var numCorrect: String? = "";

@@ -8,7 +8,7 @@
     <data>
         <variable
             name="play"
-            type="com.chickenkiller.bum.helloworld.PlayFragment" />
+            type="com.chickenkiller.bum.trimath.PlayFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,10 +1,10 @@
-package com.chickenkiller.bum.helloworld
+package com.chickenkiller.bum.trimath
 
 import androidx.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import com.chickenkiller.bum.helloworld.databinding.ActivityMainBinding
+import com.chickenkiller.bum.trimath.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

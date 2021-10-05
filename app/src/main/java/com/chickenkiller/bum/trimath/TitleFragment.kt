@@ -1,4 +1,4 @@
-package com.chickenkiller.bum.helloworld
+package com.chickenkiller.bum.trimath
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.chickenkiller.bum.helloworld.databinding.FragmentTitleBinding
+import com.chickenkiller.bum.trimath.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
 

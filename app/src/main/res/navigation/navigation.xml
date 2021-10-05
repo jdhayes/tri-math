@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/playFragment"
-        android:name="com.chickenkiller.bum.helloworld.PlayFragment"
+        android:name="com.chickenkiller.bum.trimath.PlayFragment"
         android:label="fragment_play"
         tools:layout="@layout/fragment_play" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.chickenkiller.bum.helloworld.TitleFragment"
+        android:name="com.chickenkiller.bum.trimath.TitleFragment"
         android:label="fragment_title"
         tools:layout="@layout/fragment_title" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.chickenkiller.bum.helloworld.ResultFragment"
+        android:name="com.chickenkiller.bum.trimath.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" >
         <action

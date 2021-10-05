@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hayes Math</string>
+    <string name="app_name">Tri Math</string>
     <string name="play_btn">Next</string>
     <string name="start_btn">Start</string>
     <string name="quit_btn">Quit</string>
