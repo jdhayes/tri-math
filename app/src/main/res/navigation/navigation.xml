@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.chickenkiller.bum.trimath.TitleFragment"
-        android:label="fragment_title"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_title" >
         <action
             android:id="@+id/action_titleFragment_to_playFragment"
@@ -38,4 +38,9 @@
             android:id="@+id/action_resultFragment_to_titleFragment"
             app:destination="@id/titleFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.chickenkiller.bum.trimath.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>
