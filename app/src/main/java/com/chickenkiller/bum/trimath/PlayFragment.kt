@@ -17,7 +17,7 @@ class PlayFragment : Fragment() {
     val max = 10;
     val min = 1;
     val probCount = 12;
-    var probCurrent = 0
+    var probCurrent = 1
     lateinit var top: String;
     lateinit var right: String;
     lateinit var left: String;
@@ -28,7 +28,7 @@ class PlayFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         // Display remaining questions in title
-        (activity as AppCompatActivity).supportActionBar?.title = "Problem "+probCurrent+1 +"/"+probCount
+        (activity as AppCompatActivity).supportActionBar?.title = "Tri Math: Play 1/$probCount"
 
         // Create problem list
         if (problems.isNullOrEmpty()) {
@@ -48,91 +48,138 @@ class PlayFragment : Fragment() {
         // Set the onClickListener for the submitButton
         binding.playBtn.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         { view: View ->
-            if (probCount > probCurrent) {
 
-                //Increment problem number
-                probCurrent += 1;
+            // Check answer
+             if (correct(
+                     binding.answer.text.toString(),
+                     binding.textTop.text.toString(),
+                     binding.textLeft.text.toString(),
+                     binding.textRight.text.toString())
+             ){
+                 // Increment correct
+                 numCorrect += 1
 
-                // Check answer
-                 if (correct(
-                         binding.answer.text.toString(),
-                         binding.textTop.text.toString(),
-                         binding.textLeft.text.toString(),
-                         binding.textRight.text.toString())
-                 ){
-                     numCorrect += 1
+                 // Still have more problems to solve
+                 if (probCount > probCurrent) {
+                     // Increment problem number
+                     probCurrent += 1
+
+                     // Set values in layout
+                     problems?.removeAt(0)
+
+                     // Display remaining questions in title
+                     (activity as AppCompatActivity).supportActionBar?.title =
+                         "Tri Math: Play $probCurrent/$probCount"
+
+                     // Set up problem triangle
+                     left = problems?.first()?.get(0).toString()
+                     right = problems?.first()?.get(1).toString()
+                     top = problems?.first()?.get(2).toString()
+
+                     // Mask one of the numbers with 'X'
+                     var mask: Int = Random.nextInt(1, 3)
+                     when (mask) {
+                         1 -> {
+                             left = "X"
+                         }
+                         2 -> {
+                             right = "X"
+                         }
+                         3 -> {
+                             top = "X"
+                         }
+                     }
+
+                     // Clear previous answer
+                     binding.answer.text.clear()
+
+                     // Redraw fragment
+                     binding.invalidateAll();
                  } else {
-                     numWrong += 1
+                     // No more problems so Create bundle to pass to next fragment
+                     val bundle = bundleOf("numCorrect" to numCorrect, "numWrong" to numWrong)
+
+                     //Move to next fragment and pass bundle
+                     view.findNavController().navigate(R.id.action_playFragment_to_resultFragment, bundle)
                  }
+             } else {
+                 // Still have more problems to solve
+                 if (probCount >= probCurrent) {
+                     // Increment wrong
+                     numWrong += 1
 
-                // Set values in layout
-                problems?.removeAt(0)
+                     problems?.shuffle()
 
-                var mask: Int = Random.nextInt(1, 3)
+                     // Set up problem triangle
+                     left = problems?.first()?.get(0).toString()
+                     right = problems?.first()?.get(1).toString()
+                     top = problems?.first()?.get(2).toString()
 
-                binding.answer.text.clear()
-                left = problems?.first()?.get(0).toString()
-                right = problems?.first()?.get(1).toString()
-                top = problems?.first()?.get(2).toString()
+                     // Mask one of the numbers with 'X'
+                     var mask: Int = Random.nextInt(1, 3)
+                     when (mask) {
+                         1 -> {
+                             left = "X"
+                         }
+                         2 -> {
+                             right = "X"
+                         }
+                         3 -> {
+                             top = "X"
+                         }
+                     }
 
-                // Set problem triangle
-                when (mask) {
-                    1 -> {
-                        left = "X"
-                    }
-                    2 -> {
-                        right = "X"
-                    }
-                    3 -> {
-                        top = "X"
-                    }
-                }
+                     // Clear previous answer
+                     binding.answer.text.clear()
 
-                // Display remaining questions in title
-                (activity as AppCompatActivity).supportActionBar?.title = "Problem $probCurrent/$probCount"
-
-                // Redraw fragment
-                binding.invalidateAll();
-            } else {
-                val bundle = bundleOf("numCorrect" to numCorrect, "numWrong" to numWrong)
-
-                //Pass bundle to fragment
-                view.findNavController().navigate(R.id.action_playFragment_to_resultFragment, bundle)
-            }
+                     // Redraw fragment
+                     binding.invalidateAll();
+                 } else {
+                     // Answer was wrong and there are no more problems
+                     // This should never happen
+                     throw Exception("No problems left")
+                 }
+             }
         }
         return binding.root;
     }
 
     private fun correct(ans: String, top: String, left: String, right: String): Boolean {
+        // Determine is triangle works with given answer
         var answer: Int
 
         if (top == "X") {
-            answer = Integer.parseInt(left) * Integer.parseInt(right)
+            answer = Integer.parseInt(left) + Integer.parseInt(right)
             if (answer == Integer.parseInt(ans)) { return true}
         }
         else if (left == "X") {
-            answer = Integer.parseInt(ans) * Integer.parseInt(right)
+            answer = Integer.parseInt(ans) + Integer.parseInt(right)
             if (answer == Integer.parseInt(top)) { return true}
         }
         else if (right == "X") {
-            answer = Integer.parseInt(left) * Integer.parseInt(ans)
+            answer = Integer.parseInt(left) + Integer.parseInt(ans)
             if (answer == Integer.parseInt(top)) { return true}
         }
         return false
     }
 
     private fun makeProblemList() {
+        // Generate numerous problems to solve
         problems = mutableListOf();
-        for  (i in  0..probCount) {
+        for  (i in  1..probCount) {
             problems!!.add(generateProblem());
         }
     }
 
     private fun generateProblem(): List<Int> {
+        // Get 2 random numbers
         val numLeft = Random.nextInt(max - min + 1) + min;
         val numRight = Random.nextInt(max - min + 1) + min;
-        val numTop = numLeft * numRight;
 
+        // Calculate 3rd number
+        val numTop = numLeft + numRight;
+
+        // Give back number triangle as list
         return listOf(numLeft,numRight,numTop)
     }
 

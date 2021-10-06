@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/playFragment"
         android:name="com.chickenkiller.bum.trimath.PlayFragment"
-        android:label="fragment_play"
+        android:label="Tri Math: Play"
         tools:layout="@layout/fragment_play" >
         <action
             android:id="@+id/action_playFragment_to_resultFragment"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.chickenkiller.bum.trimath.ResultFragment"
-        android:label="fragment_result"
+        android:label="Tri Math: Results"
         tools:layout="@layout/fragment_result" >
         <action
             android:id="@+id/action_resultFragment_to_playFragment"
@@ -41,6 +41,10 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.chickenkiller.bum.trimath.AboutFragment"
-        android:label="fragment_about"
+        android:label="Tri Math: About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.chickenkiller.bum.trimath.SettingsFragment"
+        android:label="Tri Math: Settings" />
 </navigation>
